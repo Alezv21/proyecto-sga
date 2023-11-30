@@ -13,12 +13,14 @@ if (
     $pass = $_POST["pass"];
     $rol = $_POST["rol"];
 
+    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
+
     $sql = "INSERT INTO usuarios (nombre, user, pass, rol)
     VALUES (?, ?, ?, ?)";
 
     if ($statement = mysqli_prepare($conexion, $sql)) {
 
-        mysqli_stmt_bind_param($statement, "ssss", $nombre, $user, $pass,  $rol);
+        mysqli_stmt_bind_param($statement, "ssss", $nombre, $user, $hashed_password,  $rol);
 
         if (mysqli_stmt_execute($statement)) {
       header('Location: ../views/usuarios.php');

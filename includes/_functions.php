@@ -35,9 +35,19 @@ function editar_usuario()
 {
     $conexion = mysqli_connect("localhost", "root", "", "sdat");
     extract($_POST);
-    $consulta = "UPDATE usuarios SET nombre = '$nombre', user = '$user',
-		pass ='$pass', rol = '$rol' WHERE id = '$id' ";
 
+    $consulta_pass_actual = "SELECT pass FROM usuarios WHERE id = '$id'";
+    $resultado_pass_actual = mysqli_query($conexion, $consulta_pass_actual);
+    $fila_pass_actual = mysqli_fetch_assoc($resultado_pass_actual);
+    $pass_actual = $fila_pass_actual['pass'];
+
+    if ($pass != $pass_actual) {
+        $pass_hash = password_hash($pass, PASSWORD_BCRYPT);
+    } else {
+        $pass_hash = $pass_actual;
+    }
+
+    $consulta = "UPDATE usuarios SET nombre = '$nombre', user = '$user', pass ='$pass_hash', rol = '$rol' WHERE id = '$id' ";
     mysqli_query($conexion, $consulta);
 
     header('Location: ../views/usuarios.php');
@@ -96,24 +106,36 @@ function acceso_user()
     $_SESSION['nombre'] = $nombre;
 
     $conexion = mysqli_connect("localhost", "root", "", "sdat");
-    $consulta = "SELECT * FROM usuarios WHERE user='$nombre' AND pass='$password'";
+
+    $consulta = "SELECT * FROM usuarios WHERE user='$nombre'";
     $resultado = mysqli_query($conexion, $consulta);
     $filas = mysqli_fetch_array($resultado);
 
-    if ($filas['rol'] == 1) { //admin
-
-        header('Location: ../views/usuarios.php');
-
-    } else if ($filas['rol'] == 2) { //director
-        header('Location: ../views/docentes.php');
-
-    } else if ($filas['rol'] == 3) { //profesor
-        header('Location: ../views/estudiante.php');
+    if ($filas) {
+        $hashed_password = $filas['pass'];
+        if (password_verify($password, $hashed_password)) {
+            if ($filas['rol'] == 1) { // admin
+                header('Location: ../views/usuarios.php');
+            } else if ($filas['rol'] == 2) { // director
+                header('Location: ../views/docentes.php');
+            } else if ($filas['rol'] == 3) { // profesor
+                header('Location: ../views/estudiante.php');
+            } else {
+                header('Location: login.php');
+                session_destroy();
+            }
+        } else {
+            header('Location: login.php');
+            session_destroy();
+        }
     } else {
         header('Location: login.php');
         session_destroy();
     }
+
+    mysqli_close($conexion);
 }
+?>
 
 
 
