@@ -19,7 +19,11 @@ if ($validar == null || $validar = '') {
 
 $id_estudiante = $_GET['id_estudiante'];
 $conexion = mysqli_connect("localhost", "root", "", "sdat");
-$consulta = "SELECT * FROM estudiante WHERE id_estudiante = $id_estudiante";
+$consulta = "SELECT estudiante.id_estudiante, estudiante.nombres, estudiante.apellidos, estudiante.edad, estudiante.sexo, seccion.descripcion secdes, cursos.descripcion curdes
+FROM estudiante
+LEFT JOIN registro_estudiante_curso on registro_estudiante_curso.id_estudiante = estudiante.id_estudiante
+LEFT JOIN cursos ON cursos.id_curso = registro_estudiante_curso.id_curso
+LEFT JOIN seccion on seccion.id_seccion = registro_estudiante_curso.id_seccion WHERE estudiante.id_estudiante = $id_estudiante";
 $resultado = mysqli_query($conexion, $consulta);
 $estudiante = mysqli_fetch_assoc($resultado);
 
@@ -99,6 +103,36 @@ if (isset($_GET['enviar'])) {
                       <option value="femenino" <?php echo ($estudiante['sexo'] == 'femenino') ? 'selected' : ''; ?>>Femenino</option>
                   </select>
               </div>
+
+              <div class="form-group">
+    <label for="curso" class="form-label">Curso *</label>
+    <select name="curso" id="curso" class="form-control" required>
+        <?php
+        $queryCursos = "SELECT id_curso, descripcion FROM cursos";
+        $resultCursos = mysqli_query($conexion, $queryCursos);
+
+        while ($rowCurso = mysqli_fetch_assoc($resultCursos)) {
+            $selected = ($estudiante['id_curso'] == $rowCurso['id_curso']) ? 'selected' : '';
+            echo "<option value='{$rowCurso['id_curso']}' {$selected}>{$rowCurso['descripcion']}</option>";
+        }
+        ?>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="seccion" class="form-label">Sección *</label>
+    <select name="seccion" id="seccion" class="form-control" required>
+        <?php
+        $querySecciones = "SELECT id_seccion, descripcion FROM seccion";
+        $resultSecciones = mysqli_query($conexion, $querySecciones);
+
+        while ($rowSeccion = mysqli_fetch_assoc($resultSecciones)) {
+            $selected = ($estudiante['id_seccion'] == $rowSeccion['id_seccion']) ? 'selected' : '';
+            echo "<option value='{$rowSeccion['id_seccion']}' {$selected}>{$rowSeccion['descripcion']}</option>";
+        }
+        ?>
+    </select>
+</div>
 
 
               <div class="form-group">

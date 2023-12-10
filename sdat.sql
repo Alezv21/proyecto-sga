@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-11-2023 a las 02:29:39
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.1.12
+-- Tiempo de generación: 11-12-2023 a las 00:43:24
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,6 +35,13 @@ CREATE TABLE `cursos` (
   `descripcion` varchar(255) NOT NULL,
   `id_docente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cursos`
+--
+
+INSERT INTO `cursos` (`id_curso`, `id_entidad_educativa`, `codigo`, `anio`, `descripcion`, `id_docente`) VALUES
+(1, 1, '1', 2012, 'curso 1', 5);
 
 -- --------------------------------------------------------
 
@@ -84,6 +91,13 @@ CREATE TABLE `entidad_educativa` (
   `telefono` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `entidad_educativa`
+--
+
+INSERT INTO `entidad_educativa` (`id_entidad_educativa`, `nombre`, `direccion`, `telefono`) VALUES
+(1, 'entidad1', 'su casa', '123213');
+
 -- --------------------------------------------------------
 
 --
@@ -103,8 +117,8 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`id_estudiante`, `nombres`, `apellidos`, `edad`, `sexo`) VALUES
-(1, 'asdsad', 'asdsad', 12, 'masculino'),
-(3, 'sasad', 'asdsad', 12, 'femenino');
+(4, 'asdsad', 'asdsad', 12, 'masculino'),
+(6, 'juan', 'juan', 12, 'masculino');
 
 -- --------------------------------------------------------
 
@@ -122,6 +136,29 @@ CREATE TABLE `etapas` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `registro_estudiante_curso`
+--
+
+CREATE TABLE `registro_estudiante_curso` (
+  `id_registro_estudiante_curso` int(11) NOT NULL,
+  `id_curso` int(11) NOT NULL,
+  `id_estudiante` int(11) NOT NULL,
+  `id_seccion` int(11) NOT NULL,
+  `nota` int(11) DEFAULT NULL,
+  `activo` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `registro_estudiante_curso`
+--
+
+INSERT INTO `registro_estudiante_curso` (`id_registro_estudiante_curso`, `id_curso`, `id_estudiante`, `id_seccion`, `nota`, `activo`) VALUES
+(1, 1, 4, 1, NULL, NULL),
+(3, 1, 6, 3, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `seccion`
 --
 
@@ -131,6 +168,15 @@ CREATE TABLE `seccion` (
   `descripcion` varchar(255) NOT NULL,
   `id_curso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `seccion`
+--
+
+INSERT INTO `seccion` (`id_seccion`, `codigo`, `descripcion`, `id_curso`) VALUES
+(1, '1', 'seccion 1', 1),
+(2, '2', 'seccion 2', 1),
+(3, '3', 'seccion 3', 1);
 
 -- --------------------------------------------------------
 
@@ -162,11 +208,11 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `user`, `pass`, `rol`) VALUES
-(1, 'Alejandro', 'Zv', '123', 1),
+(1, 'Alejandro', 'Zv', '$2y$10$STAUYFaGinGqinWP8p1rn..2i5tiZGKIGMjWaCjizh/QvpcX0HG9e', 1),
 (2, 'sofiaaa', 'sofi', '$2y$10$yFInQDaCc3SpiuTOsveIdO8S7pLMb21iDT7nHxeQxSzXms9UIF/Uy', 1),
-(5, 'eldocente', 'doc', '123', 2),
-(6, 'jose', 'jose', '123', 3),
-(8, 'asdsad', 'asdasd', '123', 1),
+(5, 'eldocente', 'doc', '$2y$10$N19NvoEurBggD2b42Gp5ceW5.gLt.e0kgJIvwx8jRb.SH.nmiueDu', 2),
+(6, 'jose', 'jose', '$2y$10$e3tj.drMEv6KZOL5/Lja1.NN6lxRnzEuz/wH5j.bcHSHDT0b3ru4G', 3),
+(8, 'asdsad', 'asdasd', '$2y$10$wFWBHH/GbaUtxVDhpj6GLej.vmV8gN92dRGyPDfUrCyv73n4q66d.', 1),
 (9, 'prueba', 'prueba', '$2y$10$GLa.A9Veq3cikdLpiYBQyO7iA1yqoj6slrYUhhZAkDRdfIDaAczhi', 1);
 
 --
@@ -213,6 +259,15 @@ ALTER TABLE `etapas`
   ADD PRIMARY KEY (`id_etapa`);
 
 --
+-- Indices de la tabla `registro_estudiante_curso`
+--
+ALTER TABLE `registro_estudiante_curso`
+  ADD PRIMARY KEY (`id_registro_estudiante_curso`),
+  ADD KEY `id_curso` (`id_curso`),
+  ADD KEY `id_estudiante` (`id_estudiante`),
+  ADD KEY `id_seccion` (`id_seccion`);
+
+--
 -- Indices de la tabla `seccion`
 --
 ALTER TABLE `seccion`
@@ -239,7 +294,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id_curso` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_curso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `docente`
@@ -251,13 +306,13 @@ ALTER TABLE `docente`
 -- AUTO_INCREMENT de la tabla `entidad_educativa`
 --
 ALTER TABLE `entidad_educativa`
-  MODIFY `id_entidad_educativa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_entidad_educativa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `etapas`
@@ -266,10 +321,16 @@ ALTER TABLE `etapas`
   MODIFY `id_etapa` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `registro_estudiante_curso`
+--
+ALTER TABLE `registro_estudiante_curso`
+  MODIFY `id_registro_estudiante_curso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `seccion`
 --
 ALTER TABLE `seccion`
-  MODIFY `id_seccion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `umbrales`
@@ -300,6 +361,14 @@ ALTER TABLE `cursos`
 ALTER TABLE `docente_entidades_educativas`
   ADD CONSTRAINT `docente_docente_entidades_educativas_fk` FOREIGN KEY (`id_docente`) REFERENCES `docente` (`id_docente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `entidad_educativa_docente_entidades_educativas_fk` FOREIGN KEY (`id_entidad_educativa`) REFERENCES `entidad_educativa` (`id_entidad_educativa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `registro_estudiante_curso`
+--
+ALTER TABLE `registro_estudiante_curso`
+  ADD CONSTRAINT `registro_estudiante_curso_ibfk_1` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id_curso`),
+  ADD CONSTRAINT `registro_estudiante_curso_ibfk_2` FOREIGN KEY (`id_estudiante`) REFERENCES `estudiante` (`id_estudiante`),
+  ADD CONSTRAINT `registro_estudiante_curso_ibfk_3` FOREIGN KEY (`id_seccion`) REFERENCES `seccion` (`id_seccion`);
 
 --
 -- Filtros para la tabla `seccion`

@@ -79,10 +79,18 @@ function editar_estudiante()
 {
     $conexion = mysqli_connect("localhost", "root", "", "sdat");
     extract($_POST);
-    $consulta = "UPDATE estudiante SET nombres = '$nombres', apellidos = '$apellidos',
-		edad ='$edad', sexo ='$sexo'  WHERE id_estudiante = '$id_estudiante' ";
 
-    mysqli_query($conexion, $consulta);
+    $id_estudiante = $_POST['id_estudiante'];
+
+    $id_curso = $_POST['curso'];
+    $id_seccion = $_POST['seccion'];
+
+    $consultaEstudiante = "UPDATE estudiante SET nombres = '$nombres', apellidos = '$apellidos',
+		edad ='$edad', sexo ='$sexo'  WHERE id_estudiante = '$id_estudiante' ";
+    mysqli_query($conexion, $consultaEstudiante);
+
+    $consultaRegistro = "UPDATE registro_estudiante_curso SET id_curso = '$id_curso', id_seccion = '$id_seccion' WHERE id_estudiante = '$id_estudiante'";
+    mysqli_query($conexion, $consultaRegistro);
 
     header('Location: ../views/estudiante.php');
 }
@@ -91,8 +99,18 @@ function agregar_estudiante()
 {
     $conexion = mysqli_connect("localhost", "root", "", "sdat");
     extract($_POST);
+
+    $id_curso = $_POST['curso'];
+    $id_seccion = $_POST['seccion'];
+
     $consulta = "INSERT INTO estudiante (nombres, apellidos, edad, sexo) VALUES ('$nombres', '$apellidos', '$edad', '$sexo')";
     mysqli_query($conexion, $consulta);
+
+    $id_estudiante = mysqli_insert_id($conexion);
+
+    $consultaAsociacion = "INSERT INTO registro_estudiante_curso (id_estudiante, id_curso, id_seccion) VALUES ('$id_estudiante', '$id_curso', '$id_seccion')";
+    mysqli_query($conexion, $consultaAsociacion);
+
     header('Location: ../views/estudiante.php');
 }
 

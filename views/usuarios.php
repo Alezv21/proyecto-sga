@@ -102,47 +102,30 @@ if ($validar == null || $validar = '') {
         </thead>
         <tbody>
 
-          <?php
+        <?php
+$roles = array(
+    1 => 'Admin',
+    2 => 'Director',
+    3 => 'Profesor'
+);
 
-          $conexion = mysqli_connect("localhost", "root", "", "sdat");
-          $SQL = mysqli_query($conexion, "SELECT usuarios.id, usuarios.nombre, usuarios.user, usuarios.pass, 
-usuarios.rol FROM usuarios");
+$conexion = mysqli_connect("localhost", "root", "", "sdat");
+$SQL = mysqli_query($conexion, "SELECT usuarios.id, usuarios.nombre, usuarios.user, usuarios.pass, usuarios.rol FROM usuarios");
 
-          while ($fila = mysqli_fetch_assoc($SQL)):
-
-            ?>
-            <tr>
-              <td>
-                <?php echo $fila['id']; ?>
-              </td>
-              <td>
-                <?php echo $fila['nombre']; ?>
-              </td>
-              <td>
-                <?php echo $fila['user']; ?>
-              </td>
-              <td>
-                <?php echo $fila['pass']; ?>
-              </td>
-              <td>
-                <?php echo $fila['rol']; ?>
-              </td>
-
-
-              <td>
-
-
-                <a class="btn btn-warning" href="editar_usuario.php?id=<?php echo $fila['id'] ?> ">
-                  <i class="fa fa-edit"></i> </a>
-
-
-                <a class="btn btn-danger btn-del" href="eliminar_usuario.php?id=<?php echo $fila['id'] ?> ">
-                  <i class="fa fa-trash"></i></a>
-              </td>
-            </tr>
-
-
-          <?php endwhile; ?>
+while ($fila = mysqli_fetch_assoc($SQL)):
+?>
+    <tr>
+        <td><?php echo $fila['id']; ?></td>
+        <td><?php echo $fila['nombre']; ?></td>
+        <td><?php echo $fila['user']; ?></td>
+        <td><?php echo $fila['pass']; ?></td>
+        <td><?php echo $roles[$fila['rol']]; ?></td>
+        <td>
+            <a class="btn btn-warning" href="editar_usuario.php?id=<?php echo $fila['id'] ?> "><i class="fa fa-edit"></i></a>
+            <a class="btn btn-danger btn-del" href="eliminar_usuario.php?id=<?php echo $fila['id'] ?> "><i class="fa fa-trash"></i></a>
+        </td>
+    </tr>
+<?php endwhile; ?>
 
 </body>
 </table>

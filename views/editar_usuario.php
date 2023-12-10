@@ -94,12 +94,12 @@ if (isset($_GET['enviar'])) {
               </div>
 
               <div class="form-group">
-                <label for="rol" class="form-label">Rol de usuario *</label>
-                <input type="number" id="rol" name="rol" class="form-control"
-                  placeholder="Escribe el rol, 1 doctor, 2 paciente.." value="<?php echo $usuario['rol']; ?>" required>
-                <input type="hidden" name="accion" value="editar_usuario">
-                <input type="hidden" name="id" value="<?php echo $id; ?>">
-              </div>
+    <label for="rol" class="form-label">Rol de usuario *</label>
+    <input type="number" id="rol" name="rol" class="form-control" value="<?php echo $usuario['rol']; ?>" required>
+    <small class="form-text text-muted">Ejemplo: 1 para Admin, 2 para Director, 3 para Profesor</small>
+    <input type="hidden" name="accion" value="editar_usuario">
+    <input type="hidden" name="id" value="<?php echo $id; ?>">
+</div>
 
               <br>
 

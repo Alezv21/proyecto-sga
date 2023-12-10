@@ -76,126 +76,162 @@ if ($validar == null || $validar = '') {
 
 
       ?>
+ <div class="col-xs-12">
 
-<div class="col-xs-12">
+<form action="../includes/_functions.php" method="POST">
+  <div id="login">
+    <div class="container">
+      <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6">
+          <div id="login-box" class="col-md-12">
 
-    <form action="../includes/_functions.php" method="POST">
-      <div id="login">
-        <div class="container">
-          <div id="login-row" class="row justify-content-center align-items-center">
-            <div id="login-column" class="col-md-6">
-              <div id="login-box" class="col-md-12">
-
-                <br>
-                <br>
-                <h3 class="text-center">Agregar Nuevo estudiante</h3>
+            <br>
+            <br>
+            <h3 class="text-center">Agregar Nuevo estudiante</h3>
 
 
-                <div class="form-group">
-                  <label for="rol" class="form-label">nombres *</label>
-                  <input type="text" id="nombres" name="nombres" class="form-control"
-                    value="<?php echo $estudiante['nombres']; ?>" required>
-                  <input type="hidden" name="accion" value="agregar_estudiante">
-                </div>
-
-                <div class="form-group">
-                  <label for="rol" class="form-label">apellidos *</label>
-                  <input type="text" id="apellidos" name="apellidos" class="form-control"
-                    value="<?php echo $estudiante['apellidos']; ?>" required>
-                  <input type="hidden" name="accion" value="agregar_estudiante">
-                </div>
-
-                <div class="form-group">
-                  <label for="rol" class="form-label">edad *</label>
-                  <input type="number" id="edad" name="edad" class="form-control"
-                    value="<?php echo $estudiante['edad']; ?>" required>
-                  <input type="hidden" name="accion" value="agregar_estudiante">
-                </div>
-
-                <div class="form-group">
-                    <label for="sexo" class="form-label">sexo *</label>
-                    <select id="sexo" name="sexo" class="form-control" required>
-                        <option value="masculino" <?php echo ($estudiante['sexo'] == 'masculino') ? 'selected' : ''; ?>>Masculino</option>
-                        <option value="femenino" <?php echo ($estudiante['sexo'] == 'femenino') ? 'selected' : ''; ?>>Femenino</option>
-                    </select>
-                    <input type="hidden" name="accion" value="agregar_estudiante">
-                </div>
-
-                <br>
-
-                <div class="mb-3">
-
-                  <button type="submit" class="btn btn-success">Agregar</button>
-
-                </div>
-              </div>
+            <div class="form-group">
+              <label for="rol" class="form-label">nombres *</label>
+              <input type="text" id="nombres" name="nombres" class="form-control"
+                value="<?php echo $estudiante['nombres']; ?>" required>
             </div>
 
-    </form>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </form>
+            <div class="form-group">
+              <label for="rol" class="form-label">apellidos *</label>
+              <input type="text" id="apellidos" name="apellidos" class="form-control"
+                value="<?php echo $estudiante['apellidos']; ?>" required>
+            </div>
 
+            <div class="form-group">
+              <label for="rol" class="form-label">edad *</label>
+              <input type="number" id="edad" name="edad" class="form-control"
+                value="<?php echo $estudiante['edad']; ?>" required>
+            </div>
 
+            <div class="form-group">
+                <label for="sexo" class="form-label">sexo *</label>
+                <select id="sexo" name="sexo" class="form-control" required>
+                    <option value="masculino" <?php echo ($estudiante['sexo'] == 'masculino') ? 'selected' : ''; ?>>Masculino</option>
+                    <option value="femenino" <?php echo ($estudiante['sexo'] == 'femenino') ? 'selected' : ''; ?>>Femenino</option>
+                </select>
+            </div>
 
-
-  <div class="container is-fluid">
-    <table class="table table-striped table-dark table_id " id="table_id">
-
-
-    <thead>
-          <tr>
-            <th>ID_estudiante</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Edad</th>
-            <th>Sexo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-
+            <div class="form-group">
+    <label for="curso" class="form-label">curso *</label>
+    <select id="curso" name="curso" class="form-control" required>
         <?php
+        $queryCursos = "SELECT id_curso, descripcion FROM cursos";
+        $resultCursos = mysqli_query($conexion, $queryCursos);
+
+        while ($rowCurso = mysqli_fetch_assoc($resultCursos)) {
+            $selected = ($estudiante['curso'] == $rowCurso['id_curso']) ? 'selected' : '';
+            echo "<option value='{$rowCurso['id_curso']}' {$selected}>{$rowCurso['descripcion']}</option>";
+        }
+        ?>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="seccion" class="form-label">seccion *</label>
+    <select id="seccion" name="seccion" class="form-control" required>
+        <?php
+        $querySecciones = "SELECT id_seccion, descripcion FROM seccion";
+        $resultSecciones = mysqli_query($conexion, $querySecciones);
+
+        while ($rowSeccion = mysqli_fetch_assoc($resultSecciones)) {
+            $selected = ($estudiante['seccion'] == $rowSeccion['id_seccion']) ? 'selected' : '';
+            echo "<option value='{$rowSeccion['id_seccion']}' {$selected}>{$rowSeccion['descripcion']}</option>";
+        }
+        ?>
+    </select>
+    <input type="hidden" name="accion" value="agregar_estudiante">
+</div>
+
+            <br>
+
+            <div class="mb-3">
+
+              <button type="submit" class="btn btn-success">Agregar</button>
+
+            </div>
+          </div>
+        </div>
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</form>
+
+
+
+
+<div class="container is-fluid">
+<table class="table table-striped table-dark table_id " id="table_id">
+
+
+<thead>
+      <tr>
+        <th>ID_estudiante</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Edad</th>
+        <th>Sexo</th>
+        <th>curso</th>
+        <th>Seccion</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <?php
 
 $conexion = mysqli_connect("localhost", "root", "", "sdat");
-$SQL = mysqli_query($conexion, "SELECT estudiante.id_estudiante, estudiante.nombres, estudiante.apellidos, estudiante.edad, estudiante.sexo 
-FROM estudiante");
+$SQL = mysqli_query($conexion, "SELECT estudiante.id_estudiante, estudiante.nombres, estudiante.apellidos, estudiante.edad, estudiante.sexo, seccion.descripcion secdes, cursos.descripcion curdes
+FROM estudiante
+LEFT JOIN registro_estudiante_curso on registro_estudiante_curso.id_estudiante = estudiante.id_estudiante
+LEFT JOIN cursos ON cursos.id_curso = registro_estudiante_curso.id_curso
+LEFT JOIN seccion on seccion.id_seccion = registro_estudiante_curso.id_seccion");
 
 
 while ($fila = mysqli_fetch_assoc($SQL)):
 
-  ?>
-  <tr>
-    <td>
-      <?php echo $fila['id_estudiante']; ?>
-    </td>
-    <td>
-      <?php echo $fila['nombres']; ?>
-    </td>
-    <td>
-      <?php echo $fila['apellidos']; ?>
-    </td>
-    <td>
-      <?php echo $fila['edad']; ?>
-    </td>
+?>
+<tr>
+<td>
+  <?php echo $fila['id_estudiante']; ?>
+</td>
+<td>
+  <?php echo $fila['nombres']; ?>
+</td>
+<td>
+  <?php echo $fila['apellidos']; ?>
+</td>
+<td>
+  <?php echo $fila['edad']; ?>
+</td>
+<td>
+  <?php echo $fila['sexo']; ?>
+</td>
+<td>
+  <?php echo $fila['curdes']; ?>
+</td>
+<td>
+  <?php echo $fila['secdes']; ?>
+</td>
+<td>
 
-    <td>
-      <?php echo $fila['sexo']; ?>
-    </td>
-    <td>
+
+  <a class="btn btn-warning" href="editar_estudiante.php?id_estudiante=<?php echo $fila['id_estudiante'] ?> ">
+    <i class="fa fa-edit"></i> </a>
 
 
-      <a class="btn btn-warning" href="editar_estudiante.php?id_estudiante=<?php echo $fila['id_estudiante'] ?> ">
-        <i class="fa fa-edit"></i> </a>
-
-
-      <a class="btn btn-danger btn-del" href="eliminar_estudiante.php?id_estudiante=<?php echo $fila['id_estudiante'] ?> ">
-        <i class="fa fa-trash"></i></a>
-    </td>
-  </tr>
+  <a class="btn btn-danger btn-del" href="eliminar_estudiante.php?id_estudiante=<?php echo $fila['id_estudiante'] ?> ">
+    <i class="fa fa-trash"></i></a>
+</td>
+</tr>
 
 
 <?php endwhile; ?>
