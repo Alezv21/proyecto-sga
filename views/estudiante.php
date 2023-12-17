@@ -91,25 +91,25 @@ if ($validar == null || $validar = '') {
 
 
             <div class="form-group">
-              <label for="rol" class="form-label">nombres *</label>
+              <label for="rol" class="form-label">Nombres *</label>
               <input type="text" id="nombres" name="nombres" class="form-control"
                 value="<?php echo $estudiante['nombres']; ?>" required>
             </div>
 
             <div class="form-group">
-              <label for="rol" class="form-label">apellidos *</label>
+              <label for="rol" class="form-label">Apellidos *</label>
               <input type="text" id="apellidos" name="apellidos" class="form-control"
                 value="<?php echo $estudiante['apellidos']; ?>" required>
             </div>
 
             <div class="form-group">
-              <label for="rol" class="form-label">edad *</label>
+              <label for="rol" class="form-label">Edad *</label>
               <input type="number" id="edad" name="edad" class="form-control"
                 value="<?php echo $estudiante['edad']; ?>" required>
             </div>
 
             <div class="form-group">
-                <label for="sexo" class="form-label">sexo *</label>
+                <label for="sexo" class="form-label">Sexo *</label>
                 <select id="sexo" name="sexo" class="form-control" required>
                     <option value="masculino" <?php echo ($estudiante['sexo'] == 'masculino') ? 'selected' : ''; ?>>Masculino</option>
                     <option value="femenino" <?php echo ($estudiante['sexo'] == 'femenino') ? 'selected' : ''; ?>>Femenino</option>
@@ -117,7 +117,7 @@ if ($validar == null || $validar = '') {
             </div>
 
             <div class="form-group">
-    <label for="curso" class="form-label">curso *</label>
+    <label for="curso" class="form-label">Curso *</label>
     <select id="curso" name="curso" class="form-control" required>
         <?php
         $queryCursos = "SELECT id_curso, descripcion FROM cursos";
@@ -132,7 +132,7 @@ if ($validar == null || $validar = '') {
 </div>
 
 <div class="form-group">
-    <label for="seccion" class="form-label">seccion *</label>
+    <label for="seccion" class="form-label">Seccion *</label>
     <select id="seccion" name="seccion" class="form-control" required>
         <?php
         $querySecciones = "SELECT id_seccion, descripcion FROM seccion";
