@@ -10,7 +10,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
         body {
-            background-color: #f8f9fa; /* Color de fondo */
+            background-color: #1e1e1e; /* Fondo negro */
+            color: #ff4500; /* Texto en color rojo */
         }
 
         #login {
@@ -18,28 +19,38 @@
         }
 
         #login-box {
-            background-color: #343a40; /* Color del cuadro de login */
+            background-color: #1e1e1e; /* Color del cuadro de login (negro) */
             padding: 20px;
             border-radius: 10px;
         }
 
         h1 {
-            font-size: 20px;
-            color: white;
-            background: red;
+            font-size: 24px;
+            color: #ff4500; /* Color rojo */
             text-align: center;
             padding: 10px;
             border-radius: 5px;
         }
 
         label {
-            font-size: 12px;
-            color: white;
-            background: red;
+            font-size: 14px;
+            color: #ff4500; /* Color rojo */
         }
 
         input {
             margin-bottom: 10px;
+        }
+
+        .btn-ingresar {
+            background-color: #1e1e1e; /* Fondo del botón (negro) */
+            border-color: #ff4500; /* Borde del botón (rojo) */
+            color: #ff4500; /* Texto del botón (rojo) */
+        }
+
+        .btn-ingresar:hover {
+            background-color: #ff4500; /* Cambio de color al pasar el ratón (rojo) */
+            border-color: #ff4500;
+            color: #1e1e1e;
         }
 
         center {
@@ -65,7 +76,7 @@
                             <input type="hidden" name="accion" value="acceso_user">
                         </div>
                         <div class="form-group text-center">
-                            <input type="submit" class="btn btn-success" value="Ingresar">
+                            <input type="submit" class="btn btn-ingresar" value="Ingresar">
                         </div>
                     </div>
                 </div>

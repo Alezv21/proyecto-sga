@@ -1,21 +1,13 @@
 <?php
-
 session_start();
 error_reporting(0);
 
 $validar = $_SESSION['nombre'];
 
 if ($validar == null || $validar = '') {
-
-  header("Location: ../includes/login.php");
-  die();
-
-
+    header("Location: ../includes/login.php");
+    die();
 }
-
-
-
-
 
 $id_estudiante = $_GET['id_estudiante'];
 $conexion = mysqli_connect("localhost", "root", "", "sdat");
@@ -28,121 +20,129 @@ $resultado = mysqli_query($conexion, $consulta);
 $estudiante = mysqli_fetch_assoc($resultado);
 
 if (isset($_GET['enviar'])) {
-  $busqueda = $_GET['busqueda'];
-
+    $busqueda = $_GET['busqueda'];
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es-MX">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registros</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros</title>
 
+    <link rel="stylesheet" href="../css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/es.css">
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
 
-  <link rel="stylesheet" href="../css/fontawesome-all.min.css">
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/es.css">
-  <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/resp/bootstrap.min.js"></script>
 
-  <script src="../js/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #1e1e1e; /* Fondo negro */
+            color: #ff4500; /* Texto en color naranja */
+        }
 
-  <script src="../js/resp/bootstrap.min.js"></script>
+        .form-group label {
+            color: #ff4500; /* Color naranja para las etiquetas */
+        }
 
+        .form-control {
+            background-color: #343a40; /* Fondo negro para los campos de entrada */
+            color: #ff4500; /* Texto naranja para los campos de entrada */
+        }
 
+        .btn-success {
+            background-color: #ff4500; /* Fondo naranja para el botón de éxito */
+            border-color: #ff4500; /* Borde naranja para el botón de éxito */
+            color: #1e1e1e; /* Texto negro para el botón de éxito */
+        }
+
+        .btn-danger {
+            background-color: #1e1e1e; /* Fondo negro para el botón de peligro */
+            border-color: #ff4500; /* Borde naranja para el botón de peligro */
+            color: #ff4500; /* Texto naranja para el botón de peligro */
+        }
+    </style>
 </head>
 
 <body id="page-top" background="https://www.elheraldo.com.ar/fotos/2021/03/23_camiseta.jpg">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <link rel="stylesheet" href="../DataTables/css/dataTables.bootstrap4.min.css">
 
-  <link rel="stylesheet" href="../css/es.css">
+    <form action="../includes/_functions.php" method="POST">
+        <div id="login">
+            <div class="container">
+                <div id="login-row" class="row justify-content-center align-items-center">
+                    <div id="login-column" class="col-md-6">
+                        <div id="login-box" class="col-md-12">
+                            <br>
+                            <br>
+                            <h3 class="text-center">Editar estudiante</h3>
+                            <div class="form-group">
+                                <label for="nombres" class="form-label">Nombres *</label>
+                                <input type="text" id="nombres" name="nombres" class="form-control"
+                                    value="<?php echo $estudiante['nombres']; ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidos">Apellidos:</label><br>
+                                <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder=""
+                                    value="<?php echo $estudiante['apellidos']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="edad">Edad:</label><br>
+                                <input type="number" name="edad" id="edad" class="form-control"
+                                    value="<?php echo $estudiante['edad']; ?>" required>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="sexo">Sexo:</label><br>
+                                <select name="sexo" id="sexo" class="form-control" required>
+                                    <option value="masculino" <?php echo ($estudiante['sexo'] == 'masculino') ? 'selected' : ''; ?>>Masculino</option>
+                                    <option value="femenino" <?php echo ($estudiante['sexo'] == 'femenino') ? 'selected' : ''; ?>>Femenino</option>
+                                </select>
+                            </div>
 
-  <script src="../js/jquery.min.js"></script>
+                            <div class="form-group">
+                                <label for="curso">Curso *</label>
+                                <select name="curso" id="curso" class="form-control" required>
+                                    <?php
+                                    $queryCursos = "SELECT id_curso, descripcion FROM cursos";
+                                    $resultCursos = mysqli_query($conexion, $queryCursos);
 
-  <script src="../js/resp/bootstrap.min.js"></script>
+                                    while ($rowCurso = mysqli_fetch_assoc($resultCursos)) {
+                                        $selected = ($estudiante['id_curso'] == $rowCurso['id_curso']) ? 'selected' : '';
+                                        echo "<option value='{$rowCurso['id_curso']}' {$selected}>{$rowCurso['descripcion']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="seccion">Sección *</label>
+                                <select name="seccion" id="seccion" class="form-control" required>
+                                    <?php
+                                    $querySecciones = "SELECT id_seccion, descripcion FROM seccion";
+                                    $resultSecciones = mysqli_query($conexion, $querySecciones);
 
-  <form action="../includes/_functions.php" method="POST">
-    <div id="login">
-      <div class="container">
-        <div id="login-row" class="row justify-content-center align-items-center">
-          <div id="login-column" class="col-md-6">
-            <div id="login-box" class="col-md-12">
+                                    while ($rowSeccion = mysqli_fetch_assoc($resultSecciones)) {
+                                        $selected = ($estudiante['id_seccion'] == $rowSeccion['id_seccion']) ? 'selected' : '';
+                                        echo "<option value='{$rowSeccion['id_seccion']}' {$selected}>{$rowSeccion['descripcion']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
 
-              <br>
-              <br>
-              <h3 class="text-center">Editar estudiante</h3>
-              <div class="form-group">
-                <label for="nombres" class="form-label">Nombres *</label>
-                <input type="text" id="nombres" name="nombres" class="form-control"
-                  value="<?php echo $estudiante['nombres']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="apellidos">Apellidos:</label><br>
-                <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder=""
-                  value="<?php echo $estudiante['apellidos']; ?>">
-              </div>
-              <div class="form-group">
-                <label for="edad">Edad:</label><br>
-                <input type="number" name="edad" id="edad" class="form-control"
-                  value="<?php echo $estudiante['edad']; ?>" required>
-              </div>
+                            <div class="form-group">
+                                <input type="hidden" name="accion" value="editar_estudiante">
+                                <input type="hidden" name="id_estudiante" value="<?php echo $id_estudiante; ?>">
+                            </div>
 
-              <div class="form-group">
-                  <label for="sexo">Sexo:</label><br>
-                  <select name="sexo" id="sexo" class="form-control" required>
-                      <option value="masculino" <?php echo ($estudiante['sexo'] == 'masculino') ? 'selected' : ''; ?>>Masculino</option>
-                      <option value="femenino" <?php echo ($estudiante['sexo'] == 'femenino') ? 'selected' : ''; ?>>Femenino</option>
-                  </select>
-              </div>
+                            <br>
 
-              <div class="form-group">
-    <label for="curso" class="form-label">Curso *</label>
-    <select name="curso" id="curso" class="form-control" required>
-        <?php
-        $queryCursos = "SELECT id_curso, descripcion FROM cursos";
-        $resultCursos = mysqli_query($conexion, $queryCursos);
-
-        while ($rowCurso = mysqli_fetch_assoc($resultCursos)) {
-            $selected = ($estudiante['id_curso'] == $rowCurso['id_curso']) ? 'selected' : '';
-            echo "<option value='{$rowCurso['id_curso']}' {$selected}>{$rowCurso['descripcion']}</option>";
-        }
-        ?>
-    </select>
-</div>
-
-<div class="form-group">
-    <label for="seccion" class="form-label">Sección *</label>
-    <select name="seccion" id="seccion" class="form-control" required>
-        <?php
-        $querySecciones = "SELECT id_seccion, descripcion FROM seccion";
-        $resultSecciones = mysqli_query($conexion, $querySecciones);
-
-        while ($rowSeccion = mysqli_fetch_assoc($resultSecciones)) {
-            $selected = ($estudiante['id_seccion'] == $rowSeccion['id_seccion']) ? 'selected' : '';
-            echo "<option value='{$rowSeccion['id_seccion']}' {$selected}>{$rowSeccion['descripcion']}</option>";
-        }
-        ?>
-    </select>
-</div>
-
-
-              <div class="form-group">
-                <input type="hidden" name="accion" value="editar_estudiante">
-                <input type="hidden" name="id_estudiante" value="<?php echo $id_estudiante; ?>">
-              </div>
-
-              <br>
-
-              <div class="mb-3">
+                            <div class="mb-3">
 
                 <button type="submit" class="btn btn-success">Editar</button>
                 <a href="estudiante.php" class="btn btn-danger">Cancelar</a>
