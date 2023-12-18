@@ -1,0 +1,20 @@
+Archivo : estudiante.php
+Cambios Realizados:
+Se ha actualizado el formato del código para seguir una convención de estilo más consistente.
+Se ha agregado una paleta de colores al encabezado del archivo.
+Archivo : editar_estudiante.php
+Cambios Realizados:
+Se ha aplicado un formato más consistente al código.
+Se ha agregado una paleta de colores al encabezado del archivo.
+Archivo : usuarios.php
+Cambios Realizados:
+Se ha aplicado un formato más consistente al código.
+Se ha agregado una paleta de colores al encabezado del archivo.
+Archivo : login.php
+Cambios Realizados:
+Se ha aplicado un formato más consistente al código.
+Se ha agregado una paleta de colores al encabezado del archivo.
+Archivo : editar_usuario.php
+Cambios Realizados:
+Se ha aplicado un formato más consistente al código.
+Se ha agregado una paleta de colores al encabezado del archivo.
