@@ -31,7 +31,7 @@ if (isset($_GET['enviar'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registros</title>
+    <title>Editar estudiante</title>
 
     <link rel="stylesheet" href="../css/fontawesome-all.min.css">
     <link rel="stylesheet" href="../css/styles.css">
@@ -43,29 +43,29 @@ if (isset($_GET['enviar'])) {
 
     <style>
         body {
-            background-color: #1e1e1e; /* Fondo negro */
-            color: #ff4500; /* Texto en color naranja */
+            background-color: #1e1e1e; 
+            color: #ff4500; 
         }
 
         .form-group label {
-            color: #ff4500; /* Color naranja para las etiquetas */
+            color: #ff4500;
         }
 
         .form-control {
-            background-color: #343a40; /* Fondo negro para los campos de entrada */
-            color: #ff4500; /* Texto naranja para los campos de entrada */
+            background-color: #343a40; 
+            color: #ff4500; 
         }
 
         .btn-success {
-            background-color: #ff4500; /* Fondo naranja para el botón de éxito */
-            border-color: #ff4500; /* Borde naranja para el botón de éxito */
-            color: #1e1e1e; /* Texto negro para el botón de éxito */
+            background-color: #ff4500;
+            border-color: #ff4500; 
+            color: #1e1e1e; 
         }
 
         .btn-danger {
-            background-color: #1e1e1e; /* Fondo negro para el botón de peligro */
-            border-color: #ff4500; /* Borde naranja para el botón de peligro */
-            color: #ff4500; /* Texto naranja para el botón de peligro */
+            background-color: #1e1e1e;
+            border-color: #ff4500; 
+            color: #ff4500; 
         }
     </style>
 </head>

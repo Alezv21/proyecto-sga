@@ -30,24 +30,24 @@ if ($validar == null || $validar = '') {
     <title>SGA</title>
     <style>
         body {
-            background-color: #1e1e1e; /* Fondo negro */
-            color: #ff4500; /* Texto en color naranja */
+            background-color: #1e1e1e; 
+            color: #ff4500; 
         }
 
         h1, th {
-            color: #FF0000; /* Encabezados y celdas de tabla en color rojo */
+            color: #FF0000; 
         }
 
         .btn-success {
-            background-color: #ff4500; /* Fondo naranja para el botón de éxito */
-            border-color: #ff4500; /* Borde naranja para el botón de éxito */
-            color: #1e1e1e; /* Texto negro para el botón de éxito */
+            background-color: #ff4500; 
+            border-color: #ff4500; 
+            color: #1e1e1e; 
         }
 
         .btn-warning, .btn-danger {
-            background-color: #1e1e1e; /* Fondo negro para los botones de advertencia y peligro */
-            border-color: #ff4500; /* Borde naranja para los botones de advertencia y peligro */
-            color: #ff4500; /* Texto naranja para los botones de advertencia y peligro */
+            background-color: #1e1e1e; 
+            border-color: #ff4500; 
+            color: #ff4500; 
         }
     </style>
 </head>
@@ -67,7 +67,6 @@ if ($validar == null || $validar = '') {
                     <i class="fa fa-power-off" aria-hidden="true"></i>
                 </a>
 
-                <a href="../includes/reporte.php" class="btn btn-primary"><b>PDF</b> </a>
             </div>
 
             <?php

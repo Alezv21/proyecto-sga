@@ -10,8 +10,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
         body {
-            background-color: #1e1e1e; /* Fondo negro */
-            color: #ff4500; /* Texto en color rojo */
+            background-color: #1e1e1e; 
+            color: #ff4500; 
         }
 
         #login {
@@ -19,14 +19,14 @@
         }
 
         #login-box {
-            background-color: #1e1e1e; /* Color del cuadro de login (negro) */
+            background-color: #1e1e1e; 
             padding: 20px;
             border-radius: 10px;
         }
 
         h1 {
             font-size: 24px;
-            color: #ff4500; /* Color rojo */
+            color: #ff4500; 
             text-align: center;
             padding: 10px;
             border-radius: 5px;
@@ -34,7 +34,7 @@
 
         label {
             font-size: 14px;
-            color: #ff4500; /* Color rojo */
+            color: #ff4500; 
         }
 
         input {
@@ -42,13 +42,13 @@
         }
 
         .btn-ingresar {
-            background-color: #1e1e1e; /* Fondo del botón (negro) */
-            border-color: #ff4500; /* Borde del botón (rojo) */
-            color: #ff4500; /* Texto del botón (rojo) */
+            background-color: #1e1e1e; 
+            border-color: #ff4500;
+            color: #ff4500; 
         }
 
         .btn-ingresar:hover {
-            background-color: #ff4500; /* Cambio de color al pasar el ratón (rojo) */
+            background-color: #ff4500; 
             border-color: #ff4500;
             color: #1e1e1e;
         }

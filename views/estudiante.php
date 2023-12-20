@@ -29,28 +29,28 @@ if ($validar == null || $validar = '') {
     <title>SGA</title>
     <style>
         body {
-            background-color: #1e1e1e; /* Fondo negro */
-            color: #ff4500; /* Texto en color rojo */
+            background-color: #1e1e1e; 
+            color: #ff4500; 
         }
 
         h1 {
-            color: #ff4500; /* Encabezados en color rojo */
+            color: #ff4500; 
         }
 
         .btn-warning {
-            background-color: #1e1e1e; /* Fondo negro para el botón de advertencia */
-            border-color: #ff4500; /* Borde naranja para el botón de advertencia */
-            color: #ff4500; /* Texto naranja para el botón de advertencia */
+            background-color: #1e1e1e; 
+            border-color: #ff4500; 
+            color: #ff4500; 
         }
 
         .btn-primary {
-            background-color: #1e1e1e; /* Fondo negro para el botón primario */
-            border-color: #ff4500; /* Borde naranja para el botón primario */
-            color: #ff4500; /* Texto naranja para el botón primario */
+            background-color: #1e1e1e; 
+            border-color: #ff4500; 
+            color: #ff4500; 
         }
 
         .form-label {
-            color: #ff4500; /* Etiquetas de formulario en color rojo */
+            color: #ff4500; 
         }
     </style>
 </head>
@@ -84,7 +84,7 @@ if ($validar == null || $validar = '') {
 
 
                 if (isset($_GET['busqueda'])) {
-                    $where = "WHERE estudiante.id_estudiante LIKE'%" . $busqueda . "%' OR estudiante.nombres  LIKE'%" . $busqueda . "%'";
+                    $where = "WHERE estudiante.id_estudiante LIKE'%" . $busqueda . "%' OR estudiante.nombres  LIKE'%" . $busqueda . "%' OR estudiante.sexo LIKE'%" . $busqueda . "%'";
                 }
             }
             ?>

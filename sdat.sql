@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2023 a las 00:43:24
+-- Tiempo de generación: 20-12-2023 a las 11:54:28
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -61,11 +61,10 @@ CREATE TABLE `docente` (
 --
 
 INSERT INTO `docente` (`id_docente`, `nombres`, `apellidos`, `documento`) VALUES
-(3, 'Fiorella', 'Larriera', '123456'),
+(3, 'Fiorella', 'Larriera', '1234567'),
 (4, 'prueba', 'lokito', '123'),
 (5, 'asd', 'asd', '12331'),
-(6, 'jon', 'marston', '123'),
-(8, 'asdsad', 'asdsad', '1233');
+(6, 'jon', 'marston', '123');
 
 -- --------------------------------------------------------
 
@@ -118,7 +117,12 @@ CREATE TABLE `estudiante` (
 
 INSERT INTO `estudiante` (`id_estudiante`, `nombres`, `apellidos`, `edad`, `sexo`) VALUES
 (4, 'asdsad', 'asdsad', 12, 'masculino'),
-(6, 'juan', 'juan', 12, 'masculino');
+(6, 'juan', 'asdasasd', 12, 'masculino'),
+(18, 'carlos', 'carlitos', 12, 'masculino'),
+(19, 'Paula', 'Garcia', 13, 'femenino'),
+(20, 'Fiorella', 'Fio', 22, 'femenino'),
+(21, 'Alejandro', 'Zv', 23, 'masculino'),
+(22, 'marco', 'londra', 13, 'masculino');
 
 -- --------------------------------------------------------
 
@@ -145,16 +149,21 @@ CREATE TABLE `registro_estudiante_curso` (
   `id_estudiante` int(11) NOT NULL,
   `id_seccion` int(11) NOT NULL,
   `nota` int(11) DEFAULT NULL,
-  `activo` tinyint(1) DEFAULT NULL
+  `Asistencia` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `registro_estudiante_curso`
 --
 
-INSERT INTO `registro_estudiante_curso` (`id_registro_estudiante_curso`, `id_curso`, `id_estudiante`, `id_seccion`, `nota`, `activo`) VALUES
-(1, 1, 4, 1, NULL, NULL),
-(3, 1, 6, 3, NULL, NULL);
+INSERT INTO `registro_estudiante_curso` (`id_registro_estudiante_curso`, `id_curso`, `id_estudiante`, `id_seccion`, `nota`, `Asistencia`) VALUES
+(1, 1, 4, 1, 5, 100),
+(3, 1, 6, 1, 1, 75),
+(15, 1, 18, 1, 4, 80),
+(16, 1, 19, 2, 1, 0),
+(17, 1, 20, 3, 5, 100),
+(18, 1, 21, 3, 1, 10),
+(19, 1, 22, 3, 3, 80);
 
 -- --------------------------------------------------------
 
@@ -209,11 +218,14 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre`, `user`, `pass`, `rol`) VALUES
 (1, 'Alejandro', 'Zv', '$2y$10$STAUYFaGinGqinWP8p1rn..2i5tiZGKIGMjWaCjizh/QvpcX0HG9e', 1),
-(2, 'sofiaaa', 'sofi', '$2y$10$yFInQDaCc3SpiuTOsveIdO8S7pLMb21iDT7nHxeQxSzXms9UIF/Uy', 1),
+(2, 'sofiaaa', 'sofiaa', '$2y$10$yFInQDaCc3SpiuTOsveIdO8S7pLMb21iDT7nHxeQxSzXms9UIF/Uy', 1),
 (5, 'eldocente', 'doc', '$2y$10$N19NvoEurBggD2b42Gp5ceW5.gLt.e0kgJIvwx8jRb.SH.nmiueDu', 2),
 (6, 'jose', 'jose', '$2y$10$e3tj.drMEv6KZOL5/Lja1.NN6lxRnzEuz/wH5j.bcHSHDT0b3ru4G', 3),
-(8, 'asdsad', 'asdasd', '$2y$10$wFWBHH/GbaUtxVDhpj6GLej.vmV8gN92dRGyPDfUrCyv73n4q66d.', 1),
-(9, 'prueba', 'prueba', '$2y$10$GLa.A9Veq3cikdLpiYBQyO7iA1yqoj6slrYUhhZAkDRdfIDaAczhi', 1);
+(9, 'prueba', 'prueba', '$2y$10$GLa.A9Veq3cikdLpiYBQyO7iA1yqoj6slrYUhhZAkDRdfIDaAczhi', 1),
+(11, 'docente', 'doce', '$2y$10$beQybGSMVO0o9j.X2BmNne6MEJYMQ.D03Q9mxIFBiKrCQuP1pAk0O', 2),
+(13, 'admin', 'admin', '$2y$10$sp/fhtq5sVSXLiTFtElw6eE7gA4UXzNKhvhFcUdDQ9u3bFmhpF1Ti', 1),
+(14, 'director', 'director', '$2y$10$o9nLi6ys8xeshjHcuiQp9eTaglZo2MxhTSSvi1PlL1r95FmhtSyJO', 2),
+(15, 'profesor', 'profesor', '$2y$10$tCkPOx1kFujnva3c2/2VP.D73R0DYXnPr2ptyLxqEsd5kRWBWzcSO', 3);
 
 --
 -- Índices para tablas volcadas
@@ -300,7 +312,7 @@ ALTER TABLE `cursos`
 -- AUTO_INCREMENT de la tabla `docente`
 --
 ALTER TABLE `docente`
-  MODIFY `id_docente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_docente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `entidad_educativa`
@@ -312,7 +324,7 @@ ALTER TABLE `entidad_educativa`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `etapas`
@@ -324,7 +336,7 @@ ALTER TABLE `etapas`
 -- AUTO_INCREMENT de la tabla `registro_estudiante_curso`
 --
 ALTER TABLE `registro_estudiante_curso`
-  MODIFY `id_registro_estudiante_curso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_registro_estudiante_curso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `seccion`
@@ -342,7 +354,7 @@ ALTER TABLE `umbrales`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas

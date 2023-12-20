@@ -27,16 +27,43 @@ if (isset($_GET['enviar'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar docente</title>
+    <title>Editar Docente</title>
+
     <link rel="stylesheet" href="../css/fontawesome-all.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/es.css">
     <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="../DataTables/css/dataTables.bootstrap4.min.css">
+
     <script src="../js/jquery.min.js"></script>
     <script src="../js/resp/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-color: #1e1e1e; 
+            color: #ff4500; 
+        }
+
+        .form-group label {
+            color: #ff4500; 
+        }
+
+        .form-control {
+            background-color: #343a40;
+            color: #ff4500; 
+        }
+
+        .btn-success {
+            background-color: #ff4500; 
+            border-color: #ff4500; 
+            color: #1e1e1e; 
+        }
+
+        .btn-danger {
+            background-color: #1e1e1e; 
+            border-color: #ff4500; 
+            color: #ff4500; 
+        }
+    </style>
 </head>
 
 <body id="page-top" background="https://www.elheraldo.com.ar/fotos/2021/03/23_camiseta.jpg">
